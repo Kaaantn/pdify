@@ -21,12 +21,12 @@ export function PageCanvas({ page, zoom }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="flex w-full max-w-full items-center justify-between px-1 text-xs text-zinc-400">
+      <div className="flex w-full max-w-full items-center justify-between px-1 text-xs text-muted-foreground">
         <span>Sayfa {page.index + 1}</span>
         <div className="flex gap-1">
           <button
             type="button"
-            className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            className="rounded p-1 hover:bg-divider/60"
             onClick={() => dispatch({ type: "ROTATE_PAGE", index: page.index, delta: 90 })}
             aria-label="Sayfayı döndür"
           >
@@ -34,7 +34,7 @@ export function PageCanvas({ page, zoom }: Props) {
           </button>
           <button
             type="button"
-            className="rounded p-1 text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40"
+            className="rounded p-1 text-red-400 hover:bg-red-50"
             onClick={() => dispatch({ type: "DELETE_PAGE", index: page.index })}
             aria-label="Sayfayı sil"
           >
@@ -44,7 +44,7 @@ export function PageCanvas({ page, zoom }: Props) {
       </div>
 
       {page.unsupportedLayout && (
-        <div className="flex w-full items-center gap-2 rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
+        <div className="flex w-full items-center gap-2 rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-700">
           <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
           Bu sayfada düzenlenebilir metin bulunamadı (muhtemelen taranmış bir görüntü).
           Metin düzenleme bu sayfada çalışmayabilir.
@@ -52,7 +52,7 @@ export function PageCanvas({ page, zoom }: Props) {
       )}
 
       <div
-        className="relative select-none overflow-hidden rounded-sm bg-white shadow-md ring-1 ring-zinc-200 dark:ring-zinc-800"
+        className="relative select-none overflow-hidden rounded-sm bg-white shadow-md ring-1 ring-divider"
         style={{
           width: page.originalWidth * scale,
           height: page.originalHeight * scale,

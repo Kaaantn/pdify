@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "Fontlar orijinaliyle birebir aynı mı kalıyor?",
-    a: "Düzenlediğiniz metin, sayfadan tespit edilen serif / sans-serif / monospace ve kalın / italik özelliklerine göre en yakın standart fonta (Helvetica, Times, Courier ailesi) eşlenir. Orijinal gömülü fontun birebir aynısı kullanılmaz; standart iş belgelerinde görsel fark genellikle fark edilmeyecek kadar küçüktür.",
+    a: "Düzenlediğiniz metin, sayfadan tespit edilen serif / sans-serif / monospace ve kalın / italik özelliklerine göre en yakın açık kaynak fonta (Liberation ailesi — Arial/Times/Courier ile ölçü uyumlu, Türkçe karakterleri de destekler) eşlenir. Orijinal gömülü fontun birebir aynısı kullanılmaz; standart iş belgelerinde görsel fark genellikle fark edilmeyecek kadar küçüktür.",
   },
   {
     q: "Hangi tür PDF'lerde en iyi sonucu alırım?",
@@ -35,12 +35,12 @@ const faqs = [
 export default function HakkindaPage() {
   return (
     <div className="mx-auto w-full max-w-2xl px-6 py-16">
-      <h1 className="text-3xl font-semibold text-zinc-900 dark:text-white">Hakkında &amp; SSS</h1>
+      <h1 className="font-heading text-3xl font-extrabold text-foreground">Hakkında &amp; SSS</h1>
       <div className="mt-8 space-y-8">
         {faqs.map((f) => (
           <div key={f.q}>
-            <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">{f.q}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{f.a}</p>
+            <h2 className="text-base font-semibold text-foreground">{f.q}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
           </div>
         ))}
       </div>

@@ -75,7 +75,7 @@ export function EditableTextBlock({ block, pageHeightPt, scale }: Props) {
           fontFamily: FONT_STACK[block.fontHint],
           fontWeight: block.bold ? 700 : 400,
           fontStyle: block.italic ? "italic" : "normal",
-          boxShadow: selected ? "0 0 0 1.5px #a3e635 inset" : undefined,
+          boxShadow: selected ? "0 0 0 1.5px #9AAD2E inset" : undefined,
           background: block.isNew || block.modified ? bgRgb : "transparent",
         }}
       >
@@ -84,7 +84,7 @@ export function EditableTextBlock({ block, pageHeightPt, scale }: Props) {
       {selected && (
         <button
           type="button"
-          className="absolute -top-3 -right-3 flex h-6 w-6 items-center justify-center rounded-full bg-white text-red-500 shadow ring-1 ring-zinc-200 hover:bg-red-50"
+          className="absolute -top-3 -right-3 flex h-6 w-6 items-center justify-center rounded-full bg-white text-red-500 shadow ring-1 ring-divider hover:bg-red-50"
           onMouseDown={(e) => e.preventDefault()}
           onClick={(e) => {
             e.stopPropagation();

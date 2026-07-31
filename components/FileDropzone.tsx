@@ -25,8 +25,8 @@ export function FileDropzone({ onFile, className }: FileDropzoneProps) {
       className={cn(
         "flex w-full flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed px-8 py-16 text-center transition-colors cursor-pointer",
         dragging
-          ? "border-lime-400 bg-lime-50 dark:bg-lime-950/20"
-          : "border-zinc-300 bg-white hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900",
+          ? "border-accent-readable bg-accent/10"
+          : "border-divider bg-background hover:border-accent-readable/60",
         className
       )}
       onClick={() => inputRef.current?.click()}
@@ -41,14 +41,14 @@ export function FileDropzone({ onFile, className }: FileDropzoneProps) {
         handleFiles(e.dataTransfer.files);
       }}
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-lime-300/40">
-        <UploadCloud className="h-7 w-7 text-zinc-700 dark:text-zinc-200" />
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent/40">
+        <UploadCloud className="h-7 w-7 text-foreground" />
       </div>
       <div>
-        <p className="text-base font-medium text-zinc-900 dark:text-zinc-100">
+        <p className="text-base font-medium text-foreground">
           PDF dosyanızı buraya sürükleyin
         </p>
-        <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="mt-1 text-sm text-muted-foreground">
           veya bilgisayarınızdan seçmek için tıklayın — dosya hiç sunucuya yüklenmez
         </p>
       </div>

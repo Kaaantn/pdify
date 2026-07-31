@@ -1,66 +1,40 @@
-"use client";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { TOOLS } from "@/lib/tools";
+import { ByKaanTan } from "@/components/site/ByKaanTan";
 
-import { useRouter } from "next/navigation";
-import { FileDropzone } from "@/components/FileDropzone";
-import { setPendingFile } from "@/lib/store/fileHandoff";
-import { FileText, Lock, Sparkles } from "lucide-react";
-
-export default function Home() {
-  const router = useRouter();
-
-  function handleFile(file: File) {
-    setPendingFile(file);
-    router.push("/editor");
-  }
-
+export default function HubHome() {
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-black">
-      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-center px-6 py-20 text-center">
-        <span className="mb-4 rounded-full bg-lime-300/40 px-3 py-1 text-xs font-medium text-zinc-700 dark:text-zinc-200">
-          %100 tarayıcıda çalışır — dosya sunucuya gitmez
-        </span>
-        <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl dark:text-white">
-          PDF&apos;inizi Word gibi düzenleyin
+    <div className="relative flex flex-1 flex-col overflow-hidden">
+      <div className="kt-gradient pointer-events-none absolute inset-x-0 top-0 h-96" />
+      <main className="relative mx-auto flex w-full max-w-4xl flex-1 flex-col items-center px-6 py-20 text-center">
+        <h1 className="font-heading text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+          KT Apps
         </h1>
-        <p className="mt-5 max-w-xl text-lg text-zinc-600 dark:text-zinc-400">
-          Herhangi bir PDF&apos;i yükleyin; her metni, her görseli ve metadata&apos;yı doğrudan
-          düzenleyin. Sonuç, yeniden export edilmiş kadar temiz görünür. Ücretsiz, kayıt yok.
+        <ByKaanTan className="mt-3" />
+        <p className="mt-5 max-w-xl text-lg text-muted-foreground">
+          Ücretsiz, reklamsız küçük araçlar. Hesap yok, kayıt yok, ödeme yok.
         </p>
 
-        <div className="mt-10 w-full">
-          <FileDropzone onFile={handleFile} />
-        </div>
-
-        <div className="mt-14 grid w-full grid-cols-1 gap-6 text-left sm:grid-cols-3">
-          <Feature
-            icon={<FileText className="h-5 w-5" />}
-            title="Gerçek içerik düzenleme"
-            desc="Metne tıklayın, yazın; görseli taşıyın, değiştirin, silin."
-          />
-          <Feature
-            icon={<Sparkles className="h-5 w-5" />}
-            title="Temiz çıktı"
-            desc="Kapla ve yeniden çiz mimarisi, düzenleme izi bırakmaz."
-          />
-          <Feature
-            icon={<Lock className="h-5 w-5" />}
-            title="%100 gizlilik"
-            desc="Dosyalarınız cihazınızdan hiç çıkmaz, sunucuya yüklenmez."
-          />
+        <div className="mt-14 grid w-full grid-cols-1 gap-5 text-left sm:grid-cols-2">
+          {TOOLS.map((tool) => (
+            <Link
+              key={tool.slug}
+              href={tool.href}
+              className="group flex flex-col rounded-xl border border-divider bg-background p-6 transition-colors hover:border-accent-readable"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-heading text-lg font-extrabold text-foreground">
+                  {tool.name}
+                </span>
+                <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-accent-readable" />
+              </div>
+              <span className="mt-1 text-sm font-medium text-accent-readable">{tool.tagline}</span>
+              <p className="mt-3 text-sm text-muted-foreground">{tool.description}</p>
+            </Link>
+          ))}
         </div>
       </main>
-    </div>
-  );
-}
-
-function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
-  return (
-    <div className="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-lime-300/40 text-zinc-700 dark:text-zinc-200">
-        {icon}
-      </div>
-      <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{title}</h3>
-      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{desc}</p>
     </div>
   );
 }

@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 export default function GizlilikPage() {
   return (
     <div className="mx-auto w-full max-w-2xl px-6 py-16">
-      <h1 className="text-3xl font-semibold text-zinc-900 dark:text-white">Gizlilik Politikası</h1>
-      <div className="prose prose-zinc mt-8 space-y-5 text-zinc-600 dark:text-zinc-400">
+      <h1 className="font-heading text-3xl font-extrabold text-foreground">Gizlilik Politikası</h1>
+      <div className="prose mt-8 space-y-5 text-muted-foreground">
         <p>
           Pdify, yüklediğiniz hiçbir PDF dosyasını bir sunucuya göndermez, saklamaz veya
           kaydetmez. Uygulama tamamen istemci taraflı (tarayıcı içi) çalışır: dosya seçimi,

@@ -18,7 +18,7 @@ export function PropertiesPanel() {
   const { state, dispatch } = useEditor();
   const doc = state.doc;
   if (!doc || !state.selectedId) {
-    return <p className="text-xs text-zinc-400">Düzenlemek için bir metin veya görsel seçin.</p>;
+    return <p className="text-xs text-muted-foreground">Düzenlemek için bir metin veya görsel seçin.</p>;
   }
 
   for (const page of doc.pages) {
@@ -26,7 +26,7 @@ export function PropertiesPanel() {
     if (t) {
       return (
         <div className="flex flex-col gap-3">
-          <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Metin Özellikleri</h3>
+          <h3 className="text-sm font-semibold text-foreground">Metin Özellikleri</h3>
           <div>
             <Label>Font boyutu</Label>
             <Input
@@ -48,7 +48,7 @@ export function PropertiesPanel() {
             <Label>Renk</Label>
             <input
               type="color"
-              className="h-9 w-full cursor-pointer rounded-md border border-zinc-200 dark:border-zinc-700"
+              className="h-9 w-full cursor-pointer rounded-md border border-divider"
               value={rgbToHex(t.color.r, t.color.g, t.color.b)}
               onChange={(e) =>
                 dispatch({
@@ -89,7 +89,7 @@ export function PropertiesPanel() {
     if (im) {
       return (
         <div className="flex flex-col gap-3">
-          <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Görsel Özellikleri</h3>
+          <h3 className="text-sm font-semibold text-foreground">Görsel Özellikleri</h3>
           <div className="grid grid-cols-2 gap-2">
             <div>
               <Label>Genişlik (pt)</Label>
@@ -127,5 +127,5 @@ export function PropertiesPanel() {
     }
   }
 
-  return <p className="text-xs text-zinc-400">Düzenlemek için bir metin veya görsel seçin.</p>;
+  return <p className="text-xs text-muted-foreground">Düzenlemek için bir metin veya görsel seçin.</p>;
 }

@@ -15,7 +15,7 @@ export function MetadataPanel() {
 
   return (
     <div className="flex flex-col gap-3">
-      <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Metadata</h3>
+      <h3 className="text-sm font-semibold text-foreground">Metadata</h3>
       <div>
         <Label>Başlık</Label>
         <Input value={meta.title} onChange={(e) => set("title", e.target.value)} />

@@ -26,7 +26,7 @@ function EditorInner() {
     started.current = true;
     const file = takePendingFile();
     if (!file) {
-      router.replace("/");
+      router.replace("/pdify");
       return;
     }
     dispatch({ type: "SET_PROGRESS", progress: { done: 0, total: 1 } });
@@ -69,8 +69,8 @@ function EditorInner() {
   if (error) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center">
-        <p className="max-w-md text-sm text-zinc-600 dark:text-zinc-300">{error}</p>
-        <Button onClick={() => router.replace("/")}>Ana sayfaya dön</Button>
+        <p className="max-w-md text-sm text-muted-foreground">{error}</p>
+        <Button onClick={() => router.replace("/pdify")}>Ana sayfaya dön</Button>
       </div>
     );
   }
@@ -79,8 +79,8 @@ function EditorInner() {
     const progress = state.progress;
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-3 p-8">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-lime-400 border-t-transparent" />
-        <p className="text-sm text-zinc-500">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent-readable border-t-transparent" />
+        <p className="text-sm text-muted-foreground">
           {progress ? `Sayfalar ayrıştırılıyor: ${progress.done}/${progress.total}` : "PDF yükleniyor..."}
         </p>
       </div>
@@ -102,7 +102,7 @@ function EditorInner() {
         downloading={downloading}
       />
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex-1 overflow-auto bg-zinc-100 px-4 py-8 dark:bg-zinc-900">
+        <div className="flex-1 overflow-auto bg-divider/30 px-4 py-8">
           <div className="mx-auto flex max-w-fit flex-col gap-10">
             {visiblePages.map((page) => (
               <div
@@ -114,7 +114,7 @@ function EditorInner() {
             ))}
           </div>
         </div>
-        <aside className="hidden w-72 shrink-0 overflow-y-auto border-l border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 md:block">
+        <aside className="hidden w-72 shrink-0 overflow-y-auto border-l border-divider bg-background p-4 md:block">
           {showMetadata ? <MetadataPanel /> : <PropertiesPanel />}
         </aside>
       </div>
