@@ -5,6 +5,7 @@ import type { ImageBlock } from "@/lib/types";
 import { imageBoxToCss, cssToImageOrigin } from "@/lib/geometry";
 import { useEditor } from "./EditorContext";
 import { Trash2, Replace } from "lucide-react";
+import { toPngDataUrl } from "@/lib/image";
 
 interface Props {
   block: ImageBlock;
@@ -78,12 +79,16 @@ export function EditableImageBlock({ block, pageHeightPt, scale }: Props) {
   function handleReplace(file: File) {
     const reader = new FileReader();
     reader.onload = () => {
-      dispatch({
-        type: "UPDATE_IMAGE",
-        pageIndex: block.pageIndex,
-        id: block.id,
-        patch: { src: reader.result as string },
-      });
+      const img = new Image();
+      img.onload = () => {
+        dispatch({
+          type: "UPDATE_IMAGE",
+          pageIndex: block.pageIndex,
+          id: block.id,
+          patch: { src: toPngDataUrl(img) },
+        });
+      };
+      img.src = reader.result as string;
     };
     reader.readAsDataURL(file);
   }

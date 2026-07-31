@@ -15,6 +15,7 @@ function fontHint(fontFamily: string): FontFamilyHint {
 
 interface ExtractTextArgs {
   pageIndex: number;
+  page: pdfjsLib.PDFPageProxy;
   textContent: Awaited<ReturnType<pdfjsLib.PDFPageProxy["getTextContent"]>>;
   viewport: pdfjsLib.PageViewport;
   ctx: CanvasRenderingContext2D | null;
@@ -25,6 +26,7 @@ interface ExtractTextArgs {
 
 export function extractTextBlocks({
   pageIndex,
+  page,
   textContent,
   viewport,
   ctx,
@@ -60,8 +62,22 @@ export function extractTextBlocks({
     const family = style?.fontFamily ?? "sans-serif";
     const hint = fontHint(family);
     const nameBlob = `${family} ${item.fontName ?? ""}`.toLowerCase();
-    const bold = /bold|black|heavy/.test(nameBlob);
-    const italic = /italic|oblique/.test(nameBlob);
+    let bold = /bold|black|heavy/.test(nameBlob);
+    let italic = /italic|oblique/.test(nameBlob);
+    // pdf.js parses the FontDescriptor flags (ForceBold etc.), which catches
+    // subset-renamed fonts (e.g. "ABCDEF+Calibri") whose PostScript name
+    // doesn't literally contain "Bold".
+    if (item.fontName) {
+      try {
+        const fontObj = page.commonObjs.get(item.fontName) as
+          | { bold?: boolean; black?: boolean; italic?: boolean }
+          | undefined;
+        if (fontObj?.bold || fontObj?.black) bold = true;
+        if (fontObj?.italic) italic = true;
+      } catch {
+        // font object not resolved yet; keep the name-based heuristic
+      }
+    }
 
     let color: RGB = { r: 0, g: 0, b: 0 };
     let localBg: RGB = bg;

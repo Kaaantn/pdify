@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useEditor } from "./EditorContext";
 import type { ImageBlock, TextBlock } from "@/lib/types";
 import { Download, ImagePlus, Settings2, Type, Undo2, ZoomIn, ZoomOut } from "lucide-react";
+import { toPngDataUrl } from "@/lib/image";
 
 interface Props {
   zoom: number;
@@ -67,7 +68,7 @@ export function Toolbar({ zoom, onZoomChange, showMetadata, onToggleMetadata, on
           y: activePage.originalHeight - 120 - height,
           width,
           height,
-          src,
+          src: toPngDataUrl(img),
           originalSrc: null,
           bgColor: { r: 1, g: 1, b: 1 },
           modified: true,

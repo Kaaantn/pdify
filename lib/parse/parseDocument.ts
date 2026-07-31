@@ -40,6 +40,7 @@ export async function parsePdfFile(
 
     const textBlocks = extractTextBlocks({
       pageIndex: i - 1,
+      page,
       textContent,
       viewport,
       ctx,
